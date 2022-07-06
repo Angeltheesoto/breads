@@ -7,6 +7,12 @@ require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
 
+// MIDDLEWARE
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
+app.use(express.static('public'))
+
 // routes
 app.get('/', (req,res) => {
  res.send('Welcome to an awsome App about Breads!')
@@ -21,7 +27,7 @@ app.listen(PORT, () => {
  console.log("nomming at port", PORT);
 })
 
-// MIDDLEWARE
-app.set('views', __dirname + '/views')
-app.set('view engine', 'jsx')
-app.engine('jsx', require('express-react-views').createEngine())
+// 404 Page
+app.get('*', (req, res) => {
+ res.send('404')
+})
