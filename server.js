@@ -18,7 +18,12 @@ app.use(methodOverride('_method'))
 
 // routes
 app.get('/', (req,res) => {
- res.send('Welcome to an awsome App about Breads!')
+ res.send(`
+ Welcome to an awsome App about Breads!
+ <br>
+ <br>
+ <a href="breads">Go to Breads page</a>
+ `)
 })
 
 // Linked up to breads_controller.js
