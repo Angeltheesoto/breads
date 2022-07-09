@@ -6,7 +6,7 @@ function Show ({bread}) {
  // Confirm we are getting our bread data in the terminal.
  // console.log(bread.name)
  return (
-  <default>
+  <Default>
    <h3>{bread.name}</h3>
    <p>
     and it 
@@ -17,9 +17,14 @@ function Show ({bread}) {
     }
     have gluten.
    </p>
-   <img src="{bread.image}" alt="{bread.name}" />
+   <img src='{bread.image}' alt="{bread.name}" />
+
+   <form action="{`/breads/${index}?_method=DELETE`}" method='POST'>
+    <input type="submit" value="DELETE" />
+   </form>
+
    <li><a href="/breads">Go home</a></li>
-  </default>
+  </Default>
  )
 }
 
