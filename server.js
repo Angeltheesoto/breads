@@ -1,7 +1,8 @@
 
-// dependencies
+// DEPENDENCIES
 const express = require('express')
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const mongoose = require('mongoose')
 
 // configuration
 require('dotenv').config()
@@ -25,6 +26,13 @@ app.get('/', (req,res) => {
  <a href="breads">Go to Breads page</a>
  `)
 })
+
+// MONGOOSE
+mongoose.connect('mongodb://localhost:27017/breads', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, 
+  () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
+)
 
 // Linked up to breads_controller.js
 const breadsController = require('./controllers/breads_controller.js')
