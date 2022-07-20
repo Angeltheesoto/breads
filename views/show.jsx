@@ -28,6 +28,6 @@ function Show ({bread, index}) {
    <a href="/breads" className='goHomeBtn'>Go home</a>
   </Default>
  )
-}
+};
 
 module.exports = Show

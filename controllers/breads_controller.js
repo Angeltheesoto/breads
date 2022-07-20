@@ -6,15 +6,19 @@ const Baker = require('../models/baker.js')
 
 // index
 breads.get('/', (req,res) => {
+  Baker.find()
+    .then(foundBakers => {
   Bread.find()
     .then(foundBreads => {
       res.render('index',
       {
         breads: foundBreads,
+        bakers: foundBakers,
         title: 'Index Page'
       })
     })
-})
+  })
+});
 
 // NEW
 // in the new route
@@ -25,23 +29,28 @@ breads.get('/new', (req, res) => {
                 bakers: foundBakers
             })
       })
-})
+});
 
 
 // EDIT
 breads.get('/:id/edit', (req, res) => {
+  Baker.find()
+  .then(foundBakers => { 
   Bread.findById(req.params.id) 
     .then(foundBread => { 
       res.render('edit', {
-        bread: foundBread 
+        bread: foundBread,
+        bakers: foundBakers
       })
     })
-})
+  })
+});
 
 
 // SHOW 
 breads.get('/:id', (req,res) => {
  Bread.findById(req.params.id)
+  .populate('baker')
   .then(foundBread => {
     const bakedBy = foundBread.getBakedBy()
     console.log(bakedBy)
@@ -52,7 +61,7 @@ breads.get('/:id', (req,res) => {
   .catch(err => {
     res.send('404')
   })
-})
+});
 
 // DELETE
 breads.delete('/:id', (req, res) => {
@@ -74,7 +83,7 @@ breads.post('/', (req, res) => {
  }
  Bread.create(req.body)
  res.redirect('/breads')
-})
+});
 
 // UPDATE
 breads.put('/:id', (req, res) => {
@@ -88,7 +97,7 @@ breads.put('/:id', (req, res) => {
       console.log(updatedBread) 
       res.redirect(`/breads/${req.params.id}`) 
     })
-})
+});
 
 
 
